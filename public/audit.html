@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人员安全管理系统 - 审计日志</title>
+  <link rel="stylesheet" href="/styles.css?v=20260514">
+</head>
+<body data-page="audit">
+  <div class="backdrop"></div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-kicker">Course Project</p>
+        <h1>人员安全管理系统</h1>
+      </div>
+      <nav class="nav">
+        <a href="/" data-nav="overview">系统总览</a>
+        <a href="/users.html" data-nav="users">用户与权限</a>
+        <a href="/security.html" data-nav="security">安全认证</a>
+        <a href="/audit.html" data-nav="audit">审计日志</a>
+      </nav>
+      <div class="sidebar-card">
+        <p class="sidebar-title">页面说明</p>
+        <span>本页用于展示关键操作日志，证明系统具备可追溯的安全审计能力。</span>
+      </div>
+      <div class="sidebar-card">
+        <p class="sidebar-title">当前登录状态</p>
+        <strong id="sidebarUser">未登录</strong>
+        <span id="sidebarRole">需要具备日志查看权限</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="page-hero">
+        <div>
+          <p class="eyebrow">Audit Trail</p>
+          <h2>审计日志与追踪记录</h2>
+          <p class="lead">系统会记录角色变更、离职冻结等关键操作，支持回溯操作者、目标对象与执行时间。</p>
+        </div>
+      </header>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>日志追踪</h3>
+          <p>记录角色分配、账号冻结等关键动作，保证系统行为可回溯。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>安全审计</h3>
+          <p>便于审计员查看敏感操作，满足课程作业中的“审计”要求。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">演示建议</p>
+          <h3>现场演示</h3>
+          <p>先去“用户与权限”页执行角色分配或离职冻结，再回本页刷新即可看到新日志。</p>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel wide">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Log Records</p>
+              <h3>审计日志列表</h3>
+            </div>
+            <button id="loadLogsBtn" class="ghost-btn">刷新日志</button>
+          </div>
+          <p class="panel-desc">点击刷新后即可查看系统内记录的关键安全操作。</p>
+          <div id="logsResult" class="table-wrap empty-state">点击按钮后显示审计日志</div>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="/common.js?v=20260514"></script>
+  <script src="/audit.js?v=20260514"></script>
+</body>
+</html>

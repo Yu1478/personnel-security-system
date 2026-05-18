@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personnel Security System - Overview</title>
+  <link rel="stylesheet" href="/styles.css?v=20260515a">
+</head>
+<body data-page="overview">
+  <div class="backdrop"></div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-kicker">Course Project</p>
+        <h1>Personnel Security System</h1>
+      </div>
+      <nav class="nav">
+        <a href="/" data-nav="overview">Overview</a>
+        <a href="/users.html" data-nav="users">Users & RBAC</a>
+        <a href="/security.html" data-nav="security">Security</a>
+        <a href="/audit.html" data-nav="audit">Audit Logs</a>
+      </nav>
+      <div class="sidebar-card">
+        <p class="sidebar-title">Demo Account</p>
+        <strong>admin1 / 123456</strong>
+        <span>Default admin account for the main demo flow.</span>
+      </div>
+      <div class="sidebar-card">
+        <p class="sidebar-title">Current Session</p>
+        <strong id="sidebarUser">Logged out</strong>
+        <span id="sidebarRole">Please login on this page first</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="page-hero">
+        <div>
+          <p class="eyebrow">Overview</p>
+          <h2>System Overview and Login</h2>
+          <p class="lead">
+            This demo covers login, RBAC, MFA, audit logs, and employee offboarding freeze.
+          </p>
+        </div>
+        <div class="hero-actions">
+          <a class="ghost-link" href="/health" target="_blank" rel="noreferrer">Health Check</a>
+        </div>
+      </header>
+
+      <section class="panel-grid">
+        <article class="panel wide">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Session</p>
+              <h3>Login Status</h3>
+            </div>
+            <button id="logoutBtn" class="ghost-btn compact-btn" type="button" disabled>Logout</button>
+          </div>
+          <div id="sessionStatus" class="status-banner idle">Not logged in. Use admin1 / 123456.</div>
+        </article>
+      </section>
+
+      <section class="panel-grid two-col">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Access</p>
+              <h3>Login</h3>
+            </div>
+          </div>
+          <p class="panel-desc">Login here first, then visit the other pages.</p>
+          <form id="loginForm" class="form-stack">
+            <label>
+              <span>Username</span>
+              <input id="username" value="admin1" required>
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="password" type="password" value="123456" required>
+            </label>
+            <button type="submit" class="primary-btn">Login</button>
+          </form>
+          <pre id="loginResult" class="result"></pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Register</p>
+              <h3>Create User</h3>
+            </div>
+          </div>
+          <p class="panel-desc">Create a new demo user for role assignment and access testing.</p>
+          <form id="registerForm" class="form-stack">
+            <label>
+              <span>Username</span>
+              <input id="registerUsername" placeholder="example: user02" required>
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="registerPassword" type="password" placeholder="at least 6 chars" required>
+            </label>
+            <label>
+              <span>Nickname</span>
+              <input id="registerNickname" placeholder="example: Demo User">
+            </label>
+            <button type="submit" class="secondary-btn">Create Account</button>
+          </form>
+          <pre id="registerResult" class="result"></pre>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Profile</p>
+              <h3>Current User</h3>
+            </div>
+            <button id="loadMeBtn" class="ghost-btn">Refresh</button>
+          </div>
+          <p class="panel-desc">Shows the current logged-in user state and roles.</p>
+          <div id="profileSummary" class="summary-card empty-state">Login to view current account info</div>
+          <pre id="meResult" class="result"></pre>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="/common.js?v=20260515a"></script>
+  <script src="/overview.js?v=20260515a"></script>
+</body>
+</html>

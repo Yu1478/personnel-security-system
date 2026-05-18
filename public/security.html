@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人员安全管理系统 - 安全认证</title>
+  <link rel="stylesheet" href="/styles.css?v=20260514">
+</head>
+<body data-page="security">
+  <div class="backdrop"></div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-kicker">Course Project</p>
+        <h1>人员安全管理系统</h1>
+      </div>
+      <nav class="nav">
+        <a href="/" data-nav="overview">系统总览</a>
+        <a href="/users.html" data-nav="users">用户与权限</a>
+        <a href="/security.html" data-nav="security">安全认证</a>
+        <a href="/audit.html" data-nav="audit">审计日志</a>
+      </nav>
+      <div class="sidebar-card">
+        <p class="sidebar-title">页面说明</p>
+        <span>本页用于演示多因素认证的配置、验证和安全增强流程。</span>
+      </div>
+      <div class="sidebar-card">
+        <p class="sidebar-title">当前登录状态</p>
+        <strong id="sidebarUser">未登录</strong>
+        <span id="sidebarRole">请先登录后再启用 MFA</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="page-hero">
+        <div>
+          <p class="eyebrow">Security</p>
+          <h2>多因素认证与安全增强</h2>
+          <p class="lead">通过 TOTP 方式启用 MFA，降低密码泄露后账号被盗用的风险。</p>
+        </div>
+      </header>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>MFA 初始化</h3>
+          <p>为当前登录用户生成 TOTP 密钥和 otpauth URL，可导入认证器应用。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>MFA 验证</h3>
+          <p>登录返回临时 token 后，输入动态验证码完成二次身份确认。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">演示建议</p>
+          <h3>答辩说明</h3>
+          <p>可强调 MFA 是这套系统区别于普通人员系统的重要安全能力。</p>
+        </article>
+      </section>
+
+      <section class="panel-grid two-col">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Identity</p>
+              <h3>当前用户摘要</h3>
+            </div>
+            <button id="loadMeBtn" class="ghost-btn">刷新</button>
+          </div>
+          <div id="profileSummary" class="summary-card empty-state">登录后显示当前账号信息</div>
+          <pre id="meResult" class="result"></pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">MFA Setup</p>
+              <h3>启用 MFA</h3>
+            </div>
+          </div>
+          <p class="panel-desc">点击后会为当前账号生成 MFA 配置，返回 base32 密钥和 otpauthUrl。</p>
+          <button id="setupMfaBtn" class="secondary-btn">为当前账号启用 MFA</button>
+          <pre id="mfaSetupResult" class="result"></pre>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel wide">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">MFA Verify</p>
+              <h3>验证 MFA</h3>
+            </div>
+          </div>
+          <p class="panel-desc">当登录接口返回 `mfaRequired=true` 时，将临时 token 和验证码填入这里完成验证。</p>
+          <form id="mfaVerifyForm" class="form-stack">
+            <label>
+              <span>临时 Token</span>
+              <textarea id="mfaTempToken" rows="4" placeholder="粘贴登录接口返回的 tempToken"></textarea>
+            </label>
+            <label>
+              <span>动态验证码</span>
+              <input id="mfaCode" placeholder="6 位 TOTP 验证码" required>
+            </label>
+            <button type="submit" class="ghost-btn solid-ghost">验证 MFA</button>
+          </form>
+          <pre id="mfaVerifyResult" class="result"></pre>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="/common.js?v=20260514"></script>
+  <script src="/security.js?v=20260514"></script>
+</body>
+</html>

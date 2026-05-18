@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人员安全管理系统 - 用户与权限</title>
+  <link rel="stylesheet" href="/styles.css?v=20260514">
+</head>
+<body data-page="users">
+  <div class="backdrop"></div>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-kicker">Course Project</p>
+        <h1>人员安全管理系统</h1>
+      </div>
+      <nav class="nav">
+        <a href="/" data-nav="overview">系统总览</a>
+        <a href="/users.html" data-nav="users">用户与权限</a>
+        <a href="/security.html" data-nav="security">安全认证</a>
+        <a href="/audit.html" data-nav="audit">审计日志</a>
+      </nav>
+      <div class="sidebar-card">
+        <p class="sidebar-title">页面说明</p>
+        <span>本页集中展示用户管理、RBAC 角色分配以及离职冻结流程。</span>
+      </div>
+      <div class="sidebar-card">
+        <p class="sidebar-title">当前登录状态</p>
+        <strong id="sidebarUser">未登录</strong>
+        <span id="sidebarRole">请先登录后再操作</span>
+      </div>
+    </aside>
+
+    <main class="content">
+      <header class="page-hero">
+        <div>
+          <p class="eyebrow">Users & RBAC</p>
+          <h2>用户与权限管理</h2>
+          <p class="lead">通过“用户 -> 角色 -> 权限”的三层结构，展示最小权限原则和动态授权流程。</p>
+        </div>
+      </header>
+
+      <section class="info-grid">
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>用户列表</h3>
+          <p>展示系统中的账号、昵称、状态和角色信息，便于管理员统一查看。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>角色分配</h3>
+          <p>可为指定用户动态分配或移除角色，体现 RBAC 的灵活性。</p>
+        </article>
+        <article class="info-card">
+          <p class="card-kicker">功能说明</p>
+          <h3>离职冻结</h3>
+          <p>可将账户标记为离职并冻结登录，防止离职人员继续访问系统。</p>
+        </article>
+      </section>
+
+      <section class="panel-grid">
+        <article class="panel wide">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Directory</p>
+              <h3>用户列表</h3>
+            </div>
+            <button id="loadUsersBtn" class="ghost-btn">刷新用户</button>
+          </div>
+          <p class="panel-desc">点击刷新即可加载系统全部用户，展示人员状态与角色信息。</p>
+          <div id="usersResult" class="table-wrap empty-state">点击按钮后显示用户列表</div>
+          <pre id="usersDebug" class="result"></pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Identity</p>
+              <h3>当前用户</h3>
+            </div>
+            <button id="loadMeBtn" class="ghost-btn">刷新</button>
+          </div>
+          <p class="panel-desc">展示当前登录账号的身份信息、角色和状态。</p>
+          <div id="profileSummary" class="summary-card empty-state">登录后显示当前账号信息</div>
+          <pre id="meResult" class="result"></pre>
+        </article>
+      </section>
+
+      <section class="panel-grid two-col">
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Authorization</p>
+              <h3>角色分配</h3>
+            </div>
+          </div>
+          <p class="panel-desc">输入用户 ID、角色和操作类型后，可分配或移除角色。</p>
+          <form id="roleForm" class="form-stack">
+            <label>
+              <span>用户 ID</span>
+              <input id="roleUserId" type="number" min="1" required>
+            </label>
+            <label>
+              <span>角色</span>
+              <select id="roleCode">
+                <option value="EMPLOYEE">EMPLOYEE</option>
+                <option value="ADMIN">ADMIN</option>
+                <option value="AUDITOR">AUDITOR</option>
+              </select>
+            </label>
+            <label>
+              <span>操作</span>
+              <select id="roleAction">
+                <option value="assign">assign</option>
+                <option value="remove">remove</option>
+              </select>
+            </label>
+            <button type="submit" class="secondary-btn">提交角色操作</button>
+          </form>
+          <pre id="roleResult" class="result"></pre>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="panel-kicker">Lifecycle</p>
+              <h3>离职冻结</h3>
+            </div>
+          </div>
+          <p class="panel-desc">输入用户 ID 后执行冻结，系统会将其标记为离职并禁止后续登录。</p>
+          <form id="leaveForm" class="form-stack">
+            <label>
+              <span>用户 ID</span>
+              <input id="leaveUserId" type="number" min="1" required>
+            </label>
+            <button type="submit" class="danger-btn">冻结并标记离职</button>
+          </form>
+          <pre id="leaveResult" class="result"></pre>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <script src="/common.js?v=20260514"></script>
+  <script src="/users.js?v=20260514"></script>
+</body>
+</html>
